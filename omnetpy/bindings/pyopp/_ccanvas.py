@@ -5,6 +5,7 @@ from ._utils import no_binding_for_method
 cRingFigure = _pybind._cRingFigure
 cOvalFigure = _pybind._cOvalFigure
 cPolygonFigure = _pybind._cPolygonFigure
+cRectangleFigure = _pybind._cRectangleFigure
 cFigure = _pybind._cFigure
 
 

@@ -338,7 +338,7 @@ void bind_cCanvas(pybind11::module &m)
 void bind_cFigure(pybind11::module &m)
 {
     pybind11::class_<
-        omnetpp::cFigure, omnetpp::cOwnedObject,
+        omnetpp::cFigure, omnetpp::cOwnedObject, omnetpp::cNamedObject,
         std::unique_ptr<omnetpp::cFigure, pybind11::nodelete>
         > py_cFigure(
         m,
@@ -2967,9 +2967,9 @@ void bind_cPolygonFigure(pybind11::module &m)
 {
 
     pybind11::class_<
-        omnetpp::cPolygonFigure, omnetpp::cFigure,
+        omnetpp::cPolygonFigure, omnetpp::cAbstractShapeFigure, omnetpp::cNamedObject,
         std::unique_ptr<omnetpp::cPolygonFigure, pybind11::nodelete>
-        > py_cPolygonFigure(
+    > py_cPolygonFigure(
         m,
         "_cPolygonFigure",
         R"docstring(

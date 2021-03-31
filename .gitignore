@@ -1,0 +1,7 @@
+# Binding
+*.o
+*.pyc
+*.so
+
+# IDE
+.vscode/

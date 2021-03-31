@@ -26,6 +26,15 @@ void bind_cSimulation(pybind11::module &m)
     );
 
     py_cSimulation.def(
+        "getSystemModule",
+        &omnetpp::cSimulation::getSystemModule,
+        R"docstring(
+        Get system module.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
         "getModule",
         &omnetpp::cSimulation::getModule,
         R"docstring(

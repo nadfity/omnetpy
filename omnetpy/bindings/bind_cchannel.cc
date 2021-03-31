@@ -11,7 +11,7 @@ void bind_cChannel(pybind11::module &m)
         omnetpp::cOwnedObject,
         omnetpp::cNamedObject,
         omnetpp::cObject
-        > py_cChannel(
+    > py_cChannel(
         m,
         "_cChannel",
         R"docstring(
@@ -19,7 +19,7 @@ void bind_cChannel(pybind11::module &m)
         )docstring"
     );
 
-    pybind11::class_<omnetpp::cChannel::result_t> py_cChannel_result_t(
+    pybind11::class_<omnetpp::cChannel::Result> py_cChannel_Result(
         py_cChannel,
         R"docstring(
         Allows returning multiple values from the processMessage() method.
@@ -28,11 +28,12 @@ void bind_cChannel(pybind11::module &m)
         )docstring"
     );
 
-    py_cChannel_result_t.def(pybind11::init<>());
+    py_cChannel_Result.def(pybind11::init<>());
 
-    py_cChannel_result_t.def_readwrite("delay", &omnetpp::cChannel::result_t::delay);
-    py_cChannel_result_t.def_readwrite("duration", &omnetpp::cChannel::result_t::duration);
-    py_cChannel_result_t.def_readwrite("discard", &omnetpp::cChannel::result_t::discard);
+    py_cChannel_Result.def_readwrite("delay", &omnetpp::cChannel::Result::delay);
+    py_cChannel_Result.def_readwrite("duration", &omnetpp::cChannel::Result::duration);
+    py_cChannel_Result.def_readwrite("discard", &omnetpp::cChannel::Result::discard);
+    py_cChannel_Result.def_readwrite("remainingDuration", &omnetpp::cChannel::Result::remainingDuration);
 
     py_cChannel.def(
         "str",

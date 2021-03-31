@@ -1,4 +1,4 @@
-FROM ubuntu:19.10 as base
+FROM ubuntu:20.04 as base
 MAINTAINER Marcos Modenesi <marcosmodenesi@gmail.com>
 
 # install basic packages
@@ -7,10 +7,10 @@ RUN apt-get update && apt-get dist-upgrade -y \
         locales sudo wget \
         build-essential gcc g++ bison flex perl \
         qt5-default tcl-dev tk-dev libxml2-dev zlib1g-dev \
-        default-jre doxygen graphviz  \
-        libopenscenegraph-3.4-dev openscenegraph-plugin-osgearth \
+        default-jre doxygen graphviz \
+        libopenscenegraph-dev openscenegraph-plugin-osgearth \
         openmpi-bin libopenmpi-dev \
-        python3 libqt5opengl5-dev \
+        python3 python3-pip libqt5opengl5-dev \
         openscenegraph-plugin-osgearth libosgearth-dev \
         libpcap-dev nemiver \
         && rm -rf /var/lib/apt/lists/*
@@ -47,6 +47,8 @@ USER $USERNAME
 ADD dockerfiles/bashrc $HOME/.bashrc
 RUN sudo chown $USERNAME:$USERNAME $HOME/.bashrc
 RUN echo '. ~/.bashrc' >> ~/.bash_profile
+
+RUN pip3 install numpy scipy pandas matplotlib posix_ipc
 
 # get source code
 RUN wget -P $HOME --progress=dot:giga \

@@ -6,7 +6,9 @@
 #     bash run.sh ~/workspace/omnetproject
 #
 
+
 workspace=$(realpath $1)
+workspace=${workspace:-$(pwd)}
 
 docker run --rm \
      -ti -e DISPLAY=$DISPLAY \

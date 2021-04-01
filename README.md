@@ -27,13 +27,17 @@ The project is the result of an academic research, see current state and limitat
 
 ## How can I use it?
 
-Launch a contianer:
+Launch a container:
 
 ```
 you@yourmachine$ docker run --rm \
    -ti -e DISPLAY=$DISPLAY \
    -v /tmp/.X11-unix:/tmp/.X11-unix \
    mmodenesi/omnetpy bash
+
+# Or you may run using our script.
+
+you@yourmachine$ bash script/run.sh ~/workspace/myomnetproject
 ```
 
 On the container, launch the omnetpp IDE:

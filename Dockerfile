@@ -31,6 +31,7 @@ RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN mkdir -p $HOME/workspace && chown -R $USERNAME:$USERNAME $HOME
 WORKDIR $HOME/workspace
 VOLUME "${HOME}/workspace"
+VOLUME "${HOME}/omnetpy"
 
 # =================================================================================================
 # End base stage

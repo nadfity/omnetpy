@@ -8,8 +8,9 @@ void bind_cModule(pybind11::module &m)
 {
     pybind11::class_<
         omnetpp::cModule,
-        omnetpp::cComponent
-        > py_cModule(
+        omnetpp::cComponent,
+        omnetpp::cObject
+    > py_cModule(
         m,
         "_cModule",
         R"docstring(

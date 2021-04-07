@@ -44,4 +44,14 @@ void bind_cSimulation(pybind11::module &m)
         pybind11::return_value_policy::reference,
         pybind11::arg("id")
     );
+
+    py_cSimulation.def(
+        "registerComponent",
+        &omnetpp::cSimulation::registerComponent,
+        R"docstring(
+        Register component instance that created using `pyopp.createScheduleInit()`
+        or other means.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
 }

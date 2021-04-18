@@ -80,6 +80,26 @@ void bind_cModule(pybind11::module &m)
     );
 
     py_cModule.def(
+        "addGate",
+        &omnetpp::cModule::addGate,
+        R"docstring(
+        Adds a gate or gate vector to the module. Gate vectors are created with zero size.
+        When the creation of a (non-vector) gate of type cGate::INOUT is requested, actually two gate objects will be created, "gatename$i" and "gatename$o".
+        The specified gatename must not contain a "$i" or "$o" suffix itself.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cModule.def(
+        "getModuleType",
+        &omnetpp::cModule::getModuleType,
+        R"docstring(
+        Returns the module type.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cModule.def(
         "getParentModule",
         &omnetpp::cModule::getParentModule,
         R"docstring(

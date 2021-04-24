@@ -22,6 +22,13 @@ void bind_cGate(pybind11::module &m)
         )docstring"
     );
 
+    pybind11::enum_<omnetpp::cGate::Type>(py_cGate, "Type")
+        .value("NONE", omnetpp::cGate::Type::NONE)
+        .value("INPUT", omnetpp::cGate::Type::INPUT)
+        .value("OUTPUT", omnetpp::cGate::Type::OUTPUT)
+        .value("INOUT", omnetpp::cGate::Type::INOUT)
+        .export_values();
+
    py_cGate.def(
         "setDeliverOnReceptionStart",
         &omnetpp::cGate::setDeliverOnReceptionStart,

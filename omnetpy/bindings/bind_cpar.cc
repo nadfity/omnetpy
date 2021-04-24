@@ -178,4 +178,12 @@ void bind_cPar(pybind11::module &m)
         Returns value as string. The cPar type must be STRING.
         )docstring"
     );
+
+    py_cPar.def(
+        "xmlValue",
+        &omnetpp::cPar::xmlValue,
+        R"docstring(
+        Returns value as cXMLElement. The cPar type must be STRING.
+        )docstring"
+    );
 }

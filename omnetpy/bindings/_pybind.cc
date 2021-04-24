@@ -39,6 +39,7 @@ void bind_cStatistic(pybind11::module &);
 void bind_cStdDev(pybind11::module &);
 void bind_cTimestampedValue(pybind11::module &);
 void bind_cTopology(pybind11::module &);
+void bind_cXMLElement(pybind11::module &);
 
 
 PYBIND11_MODULE(_pybind, m) {
@@ -82,6 +83,8 @@ PYBIND11_MODULE(_pybind, m) {
     bind_cSimulation(m);
 
     bind_cTopology(m);
+
+    bind_cXMLElement(m);
 
     pybind11::register_exception<omnetpp::cRuntimeError>(m, "_cRuntimeError");
     pybind11::register_exception<omnetpp::cDeleteModuleException>(m, "_cDeleteModuleException");

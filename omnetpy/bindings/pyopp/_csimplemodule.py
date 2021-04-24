@@ -5,8 +5,6 @@ from . import _pybind
 from ._refstore import _RefStore
 from ._utils import no_binding_for_method
 
-cGate = _pybind.cGate
-
 class cSimpleModule(_pybind._cSimpleModule):
 
     def getModuleByPath(self, path):

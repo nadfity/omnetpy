@@ -5,11 +5,12 @@ from . import _pybind
 from ._refstore import _RefStore
 from ._utils import no_binding_for_method
 
+cGate = _pybind.cGate
 
 class cSimpleModule(_pybind._cSimpleModule):
 
     def getModuleByPath(self, path):
-        return weakref.proxy(_pybind._cSimpleModule.getModuleByPath(self, path))
+        return _pybind._cSimpleModule.getModuleByPath(self, path)
 
     @no_binding_for_method
     def scheduleStart(self, *args, **kwargs):

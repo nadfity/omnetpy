@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
+#include <pybind11/stl.h> // needed as some functions take vector as arguments
 
 #include <omnetpp.h>
 #include <omnetpp/ccanvas.h>
@@ -2122,9 +2123,11 @@ void bind_cArcFigure(pybind11::module &m)
 void bind_cPolylineFigure(pybind11::module &m)
 {
     pybind11::class_<
-        omnetpp::cPolylineFigure, omnetpp::cFigure,
+        omnetpp::cPolylineFigure,
+        omnetpp::cAbstractLineFigure,
+        omnetpp::cFigure,
         std::unique_ptr<omnetpp::cPolylineFigure, pybind11::nodelete>
-        > py_cPolylineFigure(
+    > py_cPolylineFigure(
         m,
         "_cPolylineFigure",
         R"docstring(

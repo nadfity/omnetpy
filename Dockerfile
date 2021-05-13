@@ -42,7 +42,7 @@ FROM base as omnetpp
 ARG OMNETPP_VERSION="6.0pre11"
 ENV OMNETPP_ROOT $HOME/omnetpp-${OMNETPP_VERSION}
 ENV OMNETPY_ROOT $HOME/omnetpy
-ENV PYTHONPATH ${OMNETPY_ROOT}/bindings
+ENV PYTHONPATH ${OMNETPY_ROOT}/bindings:$OMNETPP_ROOT/python
 
 USER $USERNAME
 ADD dockerfiles/bashrc $HOME/.bashrc
@@ -58,6 +58,7 @@ RUN wget -P $HOME --progress=dot:giga \
     && rm $HOME/omnetpp-${OMNETPP_VERSION}-src-linux.tgz
 
 # configure and compile
+ENV PYTHONPATH ${PYTHONPATH}:$OMNETPP_ROOT/python
 RUN export PATH=$OMNETPP_ROOT/bin:$PATH; cd $OMNETPP_ROOT && ./configure && make MODE=release -j4
 
 # =================================================================================================

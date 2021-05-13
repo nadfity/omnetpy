@@ -4,7 +4,7 @@ MAINTAINER Marcos Modenesi <marcosmodenesi@gmail.com>
 # install basic packages
 RUN apt-get update && apt-get dist-upgrade -y \
     && DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        locales sudo wget \
+        locales sudo wget git \
         build-essential gcc g++ bison flex perl \
         qt5-default tcl-dev tk-dev libxml2-dev zlib1g-dev \
         default-jre doxygen graphviz \

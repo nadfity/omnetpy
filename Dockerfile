@@ -39,11 +39,6 @@ VOLUME "${HOME}/omnetpy"
 
 FROM base as omnetpp
 
-ARG OMNETPP_VERSION="6.0pre11"
-ENV OMNETPP_ROOT $HOME/omnetpp-${OMNETPP_VERSION}
-ENV OMNETPY_ROOT $HOME/omnetpy
-ENV PYTHONPATH ${OMNETPY_ROOT}/bindings:$OMNETPP_ROOT/python
-
 USER $USERNAME
 ADD dockerfiles/bashrc $HOME/.bashrc
 RUN sudo chown $USERNAME:$USERNAME $HOME/.bashrc
@@ -51,15 +46,23 @@ RUN echo '. ~/.bashrc' >> ~/.bash_profile
 
 RUN pip3 install numpy scipy pandas matplotlib posix_ipc
 
+ARG OMNETPP_VERSION="6.0pre10"
+ENV OMNETPP_ROOT $HOME/omnetpp-${OMNETPP_VERSION}
+ENV OMNETPY_ROOT $HOME/omnetpy
+ENV PYTHONPATH ${OMNETPY_ROOT}/bindings:$OMNETPP_ROOT/python
+
 # get source code
+# https://github.com/omnetpp/omnetpp/releases/download/omnetpp-${OMNETPP_VERSION}/omnetpp-${OMNETPP_VERSION}-src-linux.tgz \
 RUN wget -P $HOME --progress=dot:giga \
-    https://github.com/omnetpp/omnetpp/releases/download/omnetpp-${OMNETPP_VERSION}/omnetpp-${OMNETPP_VERSION}-src-linux.tgz \
-    && tar xzf $HOME/omnetpp-${OMNETPP_VERSION}-src-linux.tgz --directory $HOME \
-    && rm $HOME/omnetpp-${OMNETPP_VERSION}-src-linux.tgz
+    https://github.com/omnetpp/omnetpp/archive/refs/tags/omnetpp-${OMNETPP_VERSION}.tar.gz \
+    && tar xzf $HOME/omnetpp-${OMNETPP_VERSION}.tar.gz --directory $HOME \
+    && mv $HOME/omnetpp-omnetpp-${OMNETPP_VERSION} $HOME/omnetpp-${OMNETPP_VERSION} \
+    && rm $HOME/omnetpp-${OMNETPP_VERSION}.tar.gz
 
 # configure and compile
 ENV PYTHONPATH ${PYTHONPATH}:$OMNETPP_ROOT/python
-RUN export PATH=$OMNETPP_ROOT/bin:$PATH; cd $OMNETPP_ROOT && ./configure && make MODE=release -j4
+RUN export PATH=$OMNETPP_ROOT/bin:$PATH; cd $OMNETPP_ROOT && cp configure.user.dist configure.user \
+    && ./configure && make MODE=release -j4
 
 # =================================================================================================
 # End omnetpp stage

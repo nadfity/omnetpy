@@ -81,6 +81,11 @@ RUN pip3 install pybind11==2.4.3
 ADD --chown=1000:1000 omnetpy ${OMNETPY_ROOT}
 ADD --chown=1000:1000 pysamples ${HOME}/pysamples
 
+RUN echo ${OMNETPY_ROOT}; ls -lah ~; ls -lah ${OMNETPY_ROOT}
+RUN chown $USERNAME:$USERNAME ${OMNETPY_ROOT}
+RUN chown $USERNAME:$USERNAME $HOME/omnetpy
+RUN echo ${OMNETPY_ROOT}; ls -lah ~; ls -lah ${OMNETPY_ROOT}
+
 # compile bindings
 USER $USERNAME
 RUN cd ${OMNETPY_ROOT} && make

@@ -9,7 +9,7 @@
 version: "3.6"
 services:
   omnetpyenv:
-    image: nadfity/omnetpy:latest
+    image: nadfity/omnetpy:6.0pre10
     volumes:
       - ${workspace}:/home/userpp/workspace
       - ${omnetpydir}:/home/userpp/omnetpy

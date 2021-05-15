@@ -29,9 +29,6 @@ RUN groupadd --gid $GID $USERNAME
 RUN useradd -m -d $HOME -s /bin/bash --uid $UID --gid $GID -G sudo $USERNAME
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN mkdir -p $HOME/workspace && chown -R $USERNAME:$USERNAME $HOME
-WORKDIR $HOME/workspace
-VOLUME "${HOME}/workspace"
-VOLUME "${HOME}/omnetpy"
 
 # =================================================================================================
 # End base stage
@@ -81,10 +78,9 @@ RUN pip3 install pybind11==2.4.3
 ADD --chown=1000:1000 omnetpy ${OMNETPY_ROOT}
 ADD --chown=1000:1000 pysamples ${HOME}/pysamples
 
-RUN echo ${OMNETPY_ROOT}; ls -lah ~; ls -lah ${OMNETPY_ROOT}
-RUN chown $USERNAME:$USERNAME ${OMNETPY_ROOT}
-RUN chown $USERNAME:$USERNAME $HOME/omnetpy
-RUN echo ${OMNETPY_ROOT}; ls -lah ~; ls -lah ${OMNETPY_ROOT}
+VOLUME "${HOME}/workspace"
+VOLUME "${HOME}/omnetpy"
+WORKDIR $HOME/workspace
 
 # compile bindings
 USER $USERNAME

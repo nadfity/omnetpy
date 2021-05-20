@@ -32,9 +32,24 @@ public:
 
     using omnetpp::cSimpleModule::cSimpleModule;
 
-    void initialize() override
+    virtual void initialize () override
     {
         PYBIND11_OVERLOAD(void, omnetpp::cSimpleModule, initialize, );
+    }
+
+    virtual void initialize (int stage = 0) override
+    {
+        PYBIND11_OVERLOAD(void, omnetpp::cSimpleModule, initialize, stage);
+    }
+
+    /* Trampoline (need one for each virtual function) */
+    int numInitStages () const override
+    {
+        PYBIND11_OVERLOAD(
+            int,                     /* Return type */
+            omnetpp::cSimpleModule,        /* Parent class */
+            numInitStages,           /* Name of function in C++ (must match Python name) */
+        );
     }
 
     void handleMessage(omnetpp::cMessage *msg) override

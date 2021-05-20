@@ -4,17 +4,53 @@
 #include <omnetpy.h>
 #include <omnetpp/csimplemodule.h>
 
+/**
+ * Trampoline for virtual method
+ */
+class cSimpleModuleTramp : public omnetpp::cSimpleModule {
+public:
+    using omnetpp::cSimpleModule::cSimpleModule;
+
+    /* Trampoline (need one for each virtual function) */
+
+    virtual void initialize () override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cSimpleModule,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+        );
+    }
+
+    virtual void initialize (int stage = 0) override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cSimpleModule,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+            stage
+        );
+    }
+
+    virtual int numInitStages () const override {
+        PYBIND11_OVERLOAD(
+            int,                     /* Return type */
+            omnetpp::cSimpleModule,        /* Parent class */
+            numInitStages,           /* Name of function in C++ (must match Python name) */
+        );
+    }
+};
 
 void bind_cSimpleModule(pybind11::module &m)
 {
     pybind11::class_<
-            omnetpp::cSimpleModule,
-            PycSimpleModule,
-            omnetpp::cModule,
-            omnetpp::cComponent,
-            omnetpp::cNamedObject,
-            omnetpp::cObject,
-            std::unique_ptr<omnetpp::cSimpleModule, pybind11::nodelete>> py_cSimpleModule(
+        omnetpp::cSimpleModule,
+        PycSimpleModule,
+        omnetpp::cModule,
+        omnetpp::cComponent,
+        omnetpp::cNamedObject,
+        omnetpp::cObject,
+        // cSimpleModuleTramp,
+        std::unique_ptr<omnetpp::cSimpleModule, pybind11::nodelete>
+    > py_cSimpleModule(
         m,
         "_cSimpleModule",
         R"docstring(

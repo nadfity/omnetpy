@@ -3,13 +3,48 @@
 #include <omnetpp.h>
 #include <omnetpp/cmodule.h>
 
+/**
+ * Trampoline for virtual method
+ */
+class cModuleTramp : public omnetpp::cModule {
+public:
+    using omnetpp::cModule::cModule;
+
+    /* Trampoline (need one for each virtual function) */
+
+    virtual void initialize () override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cModule,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+        );
+    }
+
+    virtual void initialize (int stage = 0) override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cModule,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+            stage
+        );
+    }
+
+    virtual int numInitStages () const override {
+        PYBIND11_OVERLOAD(
+            int,                     /* Return type */
+            omnetpp::cModule,        /* Parent class */
+            numInitStages,           /* Name of function in C++ (must match Python name) */
+        );
+    }
+};
 
 void bind_cModule(pybind11::module &m)
 {
     pybind11::class_<
         omnetpp::cModule,
         omnetpp::cComponent,
-        omnetpp::cObject
+        omnetpp::cObject,
+        cModuleTramp
     > py_cModule(
         m,
         "_cModule",

@@ -17,10 +17,46 @@ public:
     using omnetpp::cComponent::refreshDisplay;
 };
 
+/**
+ * Trampoline for virtual method
+ */
+class cComponentTramp : public omnetpp::cComponent {
+public:
+    using omnetpp::cComponent::cComponent;
+
+    /* Trampoline (need one for each virtual function) */
+
+    virtual void initialize () override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cComponent,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+        );
+    }
+
+    virtual void initialize (int stage = 0) override {
+        PYBIND11_OVERLOAD(
+            void,                     /* Return type */
+            omnetpp::cComponent,     /* Parent class */
+            initialize,              /* Name of function in C++ (must match Python name) */
+            stage
+        );
+    }
+
+    virtual int numInitStages () const override {
+        PYBIND11_OVERLOAD(
+            int,                     /* Return type */
+            omnetpp::cComponent,     /* Parent class */
+            numInitStages,           /* Name of function in C++ (must match Python name) */
+        );
+    }
+};
+
+
 
 void bind_cComponent(pybind11::module &m)
 {
-    pybind11::class_<omnetpp::cComponent> py_cComponent(
+    pybind11::class_<omnetpp::cComponent, cComponentTramp> py_cComponent(
         m,
         "_cComponent",
         R"docstring(
@@ -86,7 +122,7 @@ void bind_cComponent(pybind11::module &m)
         Multi-stage initialization hook. This default implementation does
         single-stage init, that is, calls initialize() if stage is 0.
         )docstring",
-        pybind11::arg("stage")
+        pybind11::arg("stage") = 0
     );
 
     py_cComponent.def(

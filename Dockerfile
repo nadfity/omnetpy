@@ -49,16 +49,23 @@ ENV OMNETPY_ROOT $HOME/omnetpy
 ENV PYTHONPATH ${OMNETPY_ROOT}/bindings:$OMNETPP_ROOT/python
 
 # get source code
-# https://github.com/omnetpp/omnetpp/releases/download/omnetpp-${OMNETPP_VERSION}/omnetpp-${OMNETPP_VERSION}-src-linux.tgz \
 RUN wget -P $HOME --progress=dot:giga \
     https://github.com/omnetpp/omnetpp/archive/refs/tags/omnetpp-${OMNETPP_VERSION}.tar.gz \
     && tar xzf $HOME/omnetpp-${OMNETPP_VERSION}.tar.gz --directory $HOME \
-    && mv $HOME/omnetpp-omnetpp-${OMNETPP_VERSION} $HOME/omnetpp-${OMNETPP_VERSION} \
     && rm $HOME/omnetpp-${OMNETPP_VERSION}.tar.gz
+RUN wget -P $HOME --progress=dot:giga \
+    https://github.com/omnetpp/omnetpp/releases/download/omnetpp-6.0pre11/omnetpp-6.0pre11-src-linux.tgz \
+    && tar xzf $HOME/omnetpp-6.0pre11-src-linux.tgz --directory $HOME \
+    && rm $HOME/omnetpp-6.0pre11-src-linux.tgz
+
+RUN mv $HOME/omnetpp-omnetpp-${OMNETPP_VERSION}/ $HOME/omnetpp-${OMNETPP_VERSION}/
+RUN cp -r $HOME/omnetpp-6.0pre11/ide $HOME/omnetpp-${OMNETPP_VERSION}/
+RUN cp $HOME/omnetpp-6.0pre11/configure.user $HOME/omnetpp-${OMNETPP_VERSION}/
+RUN rm -rf $HOME/omnetpp-6.0pre11
 
 # configure and compile
 ENV PYTHONPATH ${PYTHONPATH}:$OMNETPP_ROOT/python
-RUN export PATH=$OMNETPP_ROOT/bin:$PATH; cd $OMNETPP_ROOT && cp configure.user.dist configure.user \
+RUN export PATH=$OMNETPP_ROOT/bin:$PATH; cd $OMNETPP_ROOT \
     && ./configure && make MODE=release -j4
 
 # =================================================================================================

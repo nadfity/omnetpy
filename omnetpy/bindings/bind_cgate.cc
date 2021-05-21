@@ -9,7 +9,9 @@ void bind_cGate(pybind11::module &m)
     // private destructor
     pybind11::class_<
         omnetpp::cGate,
-        std::unique_ptr<omnetpp::cGate, pybind11::nodelete>> py_cGate(
+        omnetpp::cObject,
+        std::unique_ptr<omnetpp::cGate, pybind11::nodelete>
+    > py_cGate(
         m,
         "cGate",
         R"docstring(

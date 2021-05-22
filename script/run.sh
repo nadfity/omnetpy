@@ -8,7 +8,7 @@
 
 rootdir=$(git -C "$(dirname $0)" rev-parse --show-toplevel)
 
-workspace=$(realpath $1)
+workspace=$(realpath ${1:-.})
 workspace=${workspace:-$(pwd)}
 
 DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml up -d

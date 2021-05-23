@@ -13,9 +13,17 @@ class cSimpleModule(_pybind._cSimpleModule):
     @classmethod
     def cast(cls, to_be_casted_obj):
         """
-        Cast an object into child class.
+        Cast an object into this class.
 
-        Be careful to use this, because it may not work and crash as segfault.
+        Be careful to use this, because it may not work or crash as segfault
+        (if the underlying class is C++). Call this from the target class.
+
+        .. codeblock
+
+           class TargetClass(Parent):
+               pass
+
+           instance = TargetClass.cast(object)
         """
         casted_obj = cls()
         casted_obj.__dict__ = to_be_casted_obj.__dict__

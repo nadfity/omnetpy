@@ -10,6 +10,17 @@ class cSimpleModule(_pybind._cSimpleModule):
     def getModuleByPath(self, path):
         return _pybind._cSimpleModule.getModuleByPath(self, path)
 
+    @classmethod
+    def cast(cls, to_be_casted_obj):
+        """
+        Cast an object into child class.
+
+        Be careful to use this, because it may not work and crash as segfault.
+        """
+        casted_obj = cls()
+        casted_obj.__dict__ = to_be_casted_obj.__dict__
+        return casted_obj
+
     @no_binding_for_method
     def scheduleStart(self, *args, **kwargs):
         pass

@@ -25,9 +25,9 @@ class cSimpleModule(_pybind._cSimpleModule):
 
            instance = TargetClass.cast(object)
         """
-        casted_obj = cls()
-        casted_obj.__dict__ = to_be_casted_obj.__dict__
-        return casted_obj
+        obj = cls()
+        to_be_casted_obj.__class__ = obj.__class__
+        return to_be_casted_obj
 
     @no_binding_for_method
     def scheduleStart(self, *args, **kwargs):

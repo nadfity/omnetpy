@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h> // needed as some functions take vector as arguments
 
 #include <omnetpp.h>
 #include <omnetpp/cmodule.h>
@@ -123,6 +124,15 @@ void bind_cModule(pybind11::module &m)
         The specified gatename must not contain a "$i" or "$o" suffix itself.
         )docstring",
         pybind11::return_value_policy::reference
+    );
+
+    py_cModule.def(
+        "getGateNames",
+        &omnetpp::cModule::getGateNames,
+        R"docstring(
+        Returns the names of the module's gates. For gate vectors and inout gates, only the base name is returned (without gate index, "[]" or the "$i"/"$o" suffix). Zero-size gate vectors will also be included.
+        The strings in the returned array do not need to be deallocated and must not be modified.
+        )docstring"
     );
 
     py_cModule.def(

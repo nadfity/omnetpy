@@ -24,7 +24,7 @@ void bind_cMessage(pybind11::module &m)
         .value("MK_PARSIM_BEGIN", omnetpp::eMessageKind::MK_PARSIM_BEGIN)
         .export_values();
 
-    pybind11::class_<omnetpp::cMessage, omnetpp::cEvent, omnetpp::cObject> py_cMessage(
+    pybind11::class_<omnetpp::cMessage, omnetpp::cEvent, omnetpp::cOwnedObject, omnetpp::cObject> py_cMessage(
         m,
         "_cMessage",
         R"docstring(

@@ -385,6 +385,7 @@ void bind_cFigure(pybind11::module &m)
     py_cFigure_Point.def(pybind11::self * float());
     py_cFigure_Point.def(pybind11::self / float());
     py_cFigure_Point.def("distanceTo", &omnetpp::cFigure::Point::distanceTo, pybind11::arg("p"));
+    py_cFigure_Point.def("getAngle", &omnetpp::cFigure::Point::getAngle);
     py_cFigure_Point.def("getLength", &omnetpp::cFigure::Point::getLength);
     py_cFigure_Point.def("translate", &omnetpp::cFigure::Point::translate, pybind11::arg("dx"), pybind11::arg("dy"));
     py_cFigure_Point.def("str", &omnetpp::cFigure::Point::str);

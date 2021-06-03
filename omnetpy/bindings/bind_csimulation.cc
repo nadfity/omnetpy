@@ -35,6 +35,41 @@ void bind_cSimulation(pybind11::module &m)
     );
 
     py_cSimulation.def(
+        "setContext",
+        &omnetpp::cSimulation::setContext,
+        R"docstring(
+        Sets the component (module or channel) in context. Used internally.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
+        "getContext",
+        &omnetpp::cSimulation::setContext,
+        R"docstring(
+        Returns the component (module or channel) currently in context.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
+        "getContextModule",
+        &omnetpp::cSimulation::getContextModule,
+        R"docstring(
+        If the current context is a module, returns its pointer, otherwise returns nullptr.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
+        "getContextSimpleModule",
+        &omnetpp::cSimulation::getContextSimpleModule,
+        R"docstring(
+        Returns the module currently in context as a simple module. If the module in context is not a simple module, returns nullptr. This is a convenience function which simply calls getContextModule().         )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
         "getModule",
         &omnetpp::cSimulation::getModule,
         R"docstring(

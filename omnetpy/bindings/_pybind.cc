@@ -15,6 +15,7 @@ void bind_cCanvas(pybind11::module &);
 void bind_cChannel(pybind11::module &);
 void bind_cComponent(pybind11::module &);
 void bind_cComponentType(pybind11::module &);
+void bind_cContextSwitcher(pybind11::module &);
 void bind_cDatarateChannel(pybind11::module &);
 void bind_cDisplayString(pybind11::module &);
 void bind_cEvent(pybind11::module &);
@@ -51,6 +52,7 @@ PYBIND11_MODULE(_pybind, m) {
     bind_cNamedObject(m);
     bind_cOwnedObject(m);
     bind_cComponent(m);
+    bind_cContextSwitcher(m);
     bind_cGate(m);
     bind_EV(m);
     bind_WATCH(m);

@@ -11,5 +11,6 @@ rootdir=$(git -C "$(dirname $0)" rev-parse --show-toplevel)
 workspace=$(realpath ${1:-.})
 workspace=${workspace:-$(pwd)}
 
-DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml up -d
+echo "DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml up --build -d"
+DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml up --build -d
 docker-compose -f $rootdir/docker-compose.yml exec omnetpyenv bash

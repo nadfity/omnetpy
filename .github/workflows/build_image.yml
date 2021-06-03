@@ -1,6 +1,8 @@
 on:
   push:
-    tags: "*"
+    branches-ignore:
+      - '**'
+    # tags: "*"
 
 jobs:
   build:

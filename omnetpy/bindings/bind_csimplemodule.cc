@@ -10,6 +10,7 @@
 class cSimpleModuleTramp : public omnetpp::cSimpleModule {
 public:
     using omnetpp::cSimpleModule::cSimpleModule;
+    using omnetpp::cObject::take;
 
     /* Trampoline (need one for each virtual function) */
 
@@ -358,6 +359,17 @@ void bind_cSimpleModule(pybind11::module &m)
         handleMessage().
         )docstring",
         pybind11::arg("time"), pybind11::arg("queue")
+    );
+
+    py_cSimpleModule.def(
+        "take",
+        &cSimpleModuleTramp::take,
+        R"docstring(
+        Makes this object the owner of obj. This method should be called by container classes when they take ownership of an object inserted into them.
+
+        The obj pointer should not be nullptr.
+        Reimplemented in cDefaultList.
+        )docstring"
     );
 
     py_cSimpleModule.def(

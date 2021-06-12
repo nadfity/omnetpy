@@ -47,6 +47,16 @@ void bind_cGate(pybind11::module &m)
         pybind11::arg("d")
     );
 
+    py_cGate.def(
+        "getPreviousGate",
+        &omnetpp::cGate::getPreviousGate,
+        R"docstring(
+        Returns the previous gate in the series of connections (the path) that contains this gate, or nullptr if this gate is the first one in the path. (E.g. for a simple module output gate, this function will return nullptr.)
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+
    py_cGate.def(
         "getNextGate",
         &omnetpp::cGate::getNextGate,
@@ -170,6 +180,16 @@ void bind_cGate(pybind11::module &m)
         Returns true if the gate is connected outside (i.e. to one of its sibling modules or to the parent module).
 
         This means that for an input gate, getPreviousGate() must be non-nullptr; for an output gate, getNextGate() must be non-nullptr.
+        )docstring"
+    );
+
+   py_cGate.def(
+        "isConnectedInside",
+        &omnetpp::cGate::isConnectedInside,
+        R"docstring(
+        Returns true if the gate (of a compound module) is connected inside (i.e. to one of its submodules).
+
+        This means that for an input gate, getNextGate() must be non-nullptr; for an output gate, getPreviousGate() must be non-nullptr.
         )docstring"
     );
 }

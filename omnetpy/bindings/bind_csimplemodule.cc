@@ -109,6 +109,17 @@ void bind_cSimpleModule(pybind11::module &m)
     );
 
     py_cSimpleModule.def(
+        "scheduleStart",
+        &cSimpleModulePublicist::scheduleStart,
+        R"docstring(
+        Creates a starting message for the module.
+
+        Reimplemented from cModule.
+        )docstring"
+    );
+
+
+    py_cSimpleModule.def(
         "activity",
         &cSimpleModulePublicist::activity,
         R"docstring(

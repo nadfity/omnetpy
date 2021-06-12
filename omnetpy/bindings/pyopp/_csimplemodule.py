@@ -29,9 +29,9 @@ class cSimpleModule(_pybind._cSimpleModule):
         to_be_casted_obj.__class__ = obj.__class__
         return to_be_casted_obj
 
-    @no_binding_for_method
-    def scheduleStart(self, *args, **kwargs):
-        pass
+    # @no_binding_for_method
+    # def scheduleStart(self, *args, **kwargs):
+    #     pass
 
     @no_binding_for_method
     def halt(self, *args, **kwargs):
@@ -53,9 +53,9 @@ class cSimpleModule(_pybind._cSimpleModule):
     def error(self, *args, **kwargs):
         pass
 
-    @no_binding_for_method
-    def scheduleStart(self, *args, **kwargs):
-        pass
+    # @no_binding_for_method
+    # def scheduleStart(self, *args, **kwargs):
+    #     pass
 
     def delete(self, thing):
         """Remove extra python reference to msg."""

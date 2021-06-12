@@ -257,6 +257,18 @@ void bind_cModule(pybind11::module &m)
     );
 
     py_cModule.def(
+        "setGateSize",
+        &omnetpp::cModule::setGateSize,
+        R"docstring(
+        Sets gate vector size. The specified gatename must not contain a "$i" or "$o" suffix:
+        it is not possible to set different vector size for the "$i" or "$o" parts of an inout gate.
+        Changing gate vector size is guaranteed NOT to change any gate IDs.
+        )docstring",
+        pybind11::arg("gatename"), pybind11::arg("size")
+    );
+
+
+    py_cModule.def(
         "buildInside",
         &omnetpp::cModule::buildInside,
         R"docstring(

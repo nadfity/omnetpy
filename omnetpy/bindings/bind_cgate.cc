@@ -162,4 +162,14 @@ void bind_cGate(pybind11::module &m)
         for a simple module, only isConnectedOutside() is checked.
         )docstring"
     );
+
+   py_cGate.def(
+        "isConnectedOutside",
+        &omnetpp::cGate::isConnectedOutside,
+        R"docstring(
+        Returns true if the gate is connected outside (i.e. to one of its sibling modules or to the parent module).
+
+        This means that for an input gate, getPreviousGate() must be non-nullptr; for an output gate, getNextGate() must be non-nullptr.
+        )docstring"
+    );
 }

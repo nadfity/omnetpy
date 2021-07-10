@@ -81,6 +81,17 @@ void bind_cSimulation(pybind11::module &m)
     );
 
     py_cSimulation.def(
+        "getSimTime",
+        &omnetpp::cSimulation::getSimTime,
+        R"docstring(
+        Returns the current simulation time. (It is also available via the global simTime() function.) Between events it returns the time of the last executed event.
+
+        Referenced by cMessage::setTimestamp(), and omnetpp::simTime().
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
+
+    py_cSimulation.def(
         "registerComponent",
         &omnetpp::cSimulation::registerComponent,
         R"docstring(

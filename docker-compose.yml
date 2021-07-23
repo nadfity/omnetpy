@@ -18,5 +18,6 @@ services:
       - DISPLAY=$DISPLAY
       - OMNETPY_ROOT=/home/userpp/workspace/omnetpy/omnetpy
     privileged: true
+    network_mode: "host"
     entrypoint: /bin/bash
     command: "-c 'while [ 1 ]; do sleep 10; done'"

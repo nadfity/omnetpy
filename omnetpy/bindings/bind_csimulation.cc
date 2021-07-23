@@ -100,4 +100,13 @@ void bind_cSimulation(pybind11::module &m)
         )docstring",
         pybind11::return_value_policy::reference
     );
+
+    py_cSimulation.def(
+        "getEnvir",
+        &omnetpp::cSimulation::getEnvir,
+        R"docstring(
+        Returns the environment object associated with this simulation object.
+        )docstring",
+        pybind11::return_value_policy::reference
+    );
 }

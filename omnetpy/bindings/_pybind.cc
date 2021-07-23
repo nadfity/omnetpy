@@ -22,6 +22,7 @@ void bind_cEvent(pybind11::module &);
 void bind_cGate(pybind11::module &);
 void bind_cHistogram(pybind11::module &);
 void bind_cHistogramStrategy(pybind11::module &);
+void bind_cISimulationLifecycleListener(pybind11::module &);
 void bind_cKSplit(pybind11::module &);
 void bind_cMessage(pybind11::module &);
 void bind_cModule(pybind11::module &);
@@ -59,6 +60,9 @@ PYBIND11_MODULE(_pybind, m) {
     bind_cDisplayString(m);
     bind_cEvent(m);
     bind_cCanvas(m);
+
+    // Low levels
+    bind_cISimulationLifecycleListener(m);
 
     bind_cChannel(m);
     bind_cDatarateChannel(m);

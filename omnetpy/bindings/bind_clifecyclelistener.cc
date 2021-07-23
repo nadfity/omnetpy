@@ -92,6 +92,11 @@ void bind_cISimulationLifecycleListener(pybind11::module &m)
         )docstring"
     );
 
+
+    py_cISimulationLifecycleListener
+    .def(pybind11::init<>());
+
+
     py_cISimulationLifecycleListener.def(
         "lifecycleEvent",
         &omnetpp::cISimulationLifecycleListener::lifecycleEvent,

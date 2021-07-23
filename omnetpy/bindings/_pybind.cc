@@ -96,4 +96,7 @@ PYBIND11_MODULE(_pybind, m) {
 
     pybind11::register_exception<omnetpp::cRuntimeError>(m, "_cRuntimeError");
     pybind11::register_exception<omnetpp::cDeleteModuleException>(m, "_cDeleteModuleException");
+
+    // Global functions
+    m.def("getSimulation", &omnetpp::getSimulation, "Returns the currently active simulation, or nullptr if there is none.");
 }

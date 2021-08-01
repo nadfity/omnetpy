@@ -7,6 +7,7 @@ cOvalFigure = _pybind._cOvalFigure
 cPolygonFigure = _pybind._cPolygonFigure
 cPolylineFigure = _pybind._cPolylineFigure
 cRectangleFigure = _pybind._cRectangleFigure
+cImageFigure = _pybind._cImageFigure
 cFigure = _pybind._cFigure
 
 

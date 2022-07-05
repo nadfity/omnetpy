@@ -15,5 +15,5 @@ echo "DISPLAY=$DISPLAY"
 echo "workspace=$workspace"
 echo "omnetpydir=$(realpath $rootdir/omnetpy)"
 
-DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml up --build -d
-docker-compose -f $rootdir/docker-compose.yml exec omnetpyenv bash
+docker run --rm -ti -e DISPLAY=$DISPLAY -v ${workspace}:/home/userpp/workspace -v ${omnetpydir}:/home/userpp/omnetpy -e OMNETPY_ROOT=/home/userpp/workspace/omnetpy/omnetpy --privileged -v /tmp/.X11-unix:/tmp/.X11-unix nadfity/omnetpy bash
+DISPLAY=$DISPLAY workspace=$workspace omnetpydir=$(realpath $rootdir/omnetpy) docker-compose -f $rootdir/docker-compose.yml exec nadfity/omnetpy bash

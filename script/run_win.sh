@@ -8,6 +8,8 @@
 
 rootdir=$(git -C "$(dirname $0)" rev-parse --show-toplevel)
 
+# TODO: use grep or something to make it dynamic
+# DISPLAY=YOUR.IP:0.0
 workspace=$(realpath ${1:-.})
 workspace=${workspace:-$(pwd)}
 

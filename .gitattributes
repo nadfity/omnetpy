@@ -1,0 +1,3 @@
+# .yml and .sh should be in lf format to be used by `bash`
+*.yml   eol=lf
+*.sh    eol=lf

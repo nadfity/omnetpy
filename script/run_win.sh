@@ -8,8 +8,11 @@
 
 rootdir=$(git -C "$(dirname $0)" rev-parse --show-toplevel)
 
-# TODO: use grep or something to make it dynamic
-# DISPLAY=YOUR.IP:0.0
+echo "Please enter your IPv4 Address under Ethernet adapter vEthernet (WSL)."
+echo -e "You can check it by typing ipconfig on powershell."
+read YOURIP
+
+DISPLAY=$YOURIP:0.0
 workspace=$(realpath ${1:-.})
 workspace=${workspace:-$(pwd)}
 
